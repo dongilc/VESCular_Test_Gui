@@ -208,7 +208,7 @@ layout_col1 = [ [sg.Table(values=ports_data, headings=ports_title, max_col_width
                                 alternating_row_color='black',
                                 enable_events=True,
                                 key='-USB_TABLE-',
-                                row_height=20)],
+                                row_height=25)],
                 [sg.Text('Baudrate', font=("Tahoma", 12)), sg.Combo(values=baud, default_value='921600', readonly=True, k='-BAUD-')],
                 [sg.Button('SCAN'), sg.Button('CONNECT'), sg.Button('DISCONNECT')],
                 [sg.HorizontalSeparator()],
@@ -223,7 +223,7 @@ layout_col1 = [ [sg.Table(values=ports_data, headings=ports_title, max_col_width
                                 num_rows=3,
                                 alternating_row_color='black',
                                 key='-VESC_TABLE-',
-                                row_height=20)],
+                                row_height=25)],
                 [sg.Button('SCAN VESC'), sg.Button('Refresh List')],
                 #[sg.HorizontalSeparator()],
 ]
