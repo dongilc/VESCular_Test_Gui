@@ -7,8 +7,8 @@ import glob
 import ctypes
 import serial.tools.list_ports
 import platform
-import vesc_crc as vc
-from general_defines import *
+from . import vesc_crc
+from .general_defines import *
 
 ######################### USB #########################
 def list_serial():
@@ -86,7 +86,7 @@ def packet_encoding(comm, comm_value = None):
 
         arr = (ctypes.c_ubyte * len(data_frame))(*data_frame)
         #crc = crc_vesc.crc16(arr,len(data_frame))
-        crc = vc.crc16(arr,len(data_frame))
+        crc = vesc_crc.crc16(arr,len(data_frame))
         crch = (crc >> 8) & 0xFF
         crcl = crc & 0xFF
         crc_frame = [crch, crcl]
@@ -149,7 +149,7 @@ class VESC_USB:
     def crc_check(self, data_frame, crc_input):
         arr = (ctypes.c_ubyte * len(data_frame))(*data_frame)
         #crc = crc_vesc.crc16(arr,len(data_frame))
-        crc = vc.crc16(arr,len(data_frame))
+        crc = vesc_crc.crc16(arr,len(data_frame))
         crch = (crc >> 8) & 0xFF
         crcl = crc & 0xFF
 

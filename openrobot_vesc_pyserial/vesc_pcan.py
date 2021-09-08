@@ -1,5 +1,5 @@
-from general_defines import *
-from PCANBasic import *
+from .general_defines import *
+from .PCANBasic import *
 
 ######################### PCAN #########################
 class PCAN:

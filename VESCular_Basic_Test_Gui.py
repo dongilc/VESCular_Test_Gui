@@ -5,7 +5,7 @@ import platform
 from PySimpleGUI.PySimpleGUI import T
 import serial
 import time
-import vesc_pyserial as vs
+from openrobot_vesc_pyserial import vesc_pyserial as vs
 from threading import Timer
 
 ######################### Class Init #########################
