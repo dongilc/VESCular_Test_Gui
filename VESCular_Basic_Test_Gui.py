@@ -204,11 +204,11 @@ layout_col1 = [ [sg.Table(values=ports_data, headings=ports_title, max_col_width
                                 auto_size_columns=False,
                                 display_row_numbers=True,
                                 justification='center',
-                                num_rows=1,
+                                num_rows=2,
                                 alternating_row_color='black',
                                 enable_events=True,
                                 key='-USB_TABLE-',
-                                row_height=25)],
+                                row_height=30)],
                 [sg.Text('Baudrate', font=("Tahoma", 12)), sg.Combo(values=baud, default_value='921600', readonly=True, k='-BAUD-')],
                 [sg.Button('SCAN'), sg.Button('CONNECT'), sg.Button('DISCONNECT')],
                 [sg.HorizontalSeparator()],
@@ -223,7 +223,7 @@ layout_col1 = [ [sg.Table(values=ports_data, headings=ports_title, max_col_width
                                 num_rows=3,
                                 alternating_row_color='black',
                                 key='-VESC_TABLE-',
-                                row_height=25)],
+                                row_height=30)],
                 [sg.Button('SCAN VESC'), sg.Button('Refresh List')],
                 #[sg.HorizontalSeparator()],
 ]
@@ -231,7 +231,7 @@ layout_col1 = [ [sg.Table(values=ports_data, headings=ports_title, max_col_width
 logging_layout = [ [sg.Button('Clear'),
                     sg.Button('DEBUG PRINT ON'), 
                     sg.Button('DEBUG PRINT OFF')],
-                   [sg.Output(size=(58,20), font='Courier 8', key='-OUTPUT-')],
+                   [sg.Output(size=(45,16), font='Courier 11', key='-OUTPUT-')],
 ]
 
 command_layout = [ [sg.Text("Terminal Command to"), 
@@ -250,9 +250,13 @@ layout_main = [ [sg.Column(layout_col1),
 
 # 4k hidpi solution
 make_dpi_aware()
-#print(platform.architecture())
+#print(platform.system())
+#print(platform.architecture()[1])
 # Create the Window
-window = sg.Window('VESCular Basic Test Gui', layout_main)
+if platform.system() == "Linux" and platform.architecture()[1] == "ELF":
+    window = sg.Window('VESCular Basic Test Gui', layout_main, location=(0,0), size=(800,600), keep_on_top=True)
+else:
+    window = sg.Window('VESCular Basic Test Gui', layout_main)
 
 ######################### GUI Event Loop #########################
 # Event Loop to process "events" and get the "values" of the inputs
@@ -267,6 +271,7 @@ while True:
             if class_instance.serial_name is not None:
                 if class_instance.serial_name.is_open:
                     class_instance.serial_name.close()
+        break
 
     if event == "-USB_TABLE-":
         row = values['-USB_TABLE-']
