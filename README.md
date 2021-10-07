@@ -2,6 +2,7 @@
 
 1. install tkinter
 ```bash
+sudo apt-get install python3-pip
 sudo apt-get install python3-tk
 ```
 
